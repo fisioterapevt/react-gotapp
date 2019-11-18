@@ -1,32 +1,47 @@
 import React, {Component} from 'react';
-import './randomChar.css';
+import { ListGroup, ListGroupItem } from 'reactstrap';
+import styled from 'styled-components';
+
+const RandomCharBlock = styled.div `
+    background-color: #fff;
+    padding: 25px 25px 15px 25px;
+    margin-bottom: 40px;
+    
+    h4 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+`
+export const CharAttributes = {
+    fontWeight: 'bold'
+}
 
 export default class RandomChar extends Component {
 
     render() {
 
         return (
-            <div className="random-block rounded">
+            <RandomCharBlock className="random-block rounded">
                 <h4>Random Character: John</h4>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Gender </span>
+                <ListGroup className="list-group-flush">
+                    <ListGroupItem className="d-flex justify-content-between">
+                        <span style={CharAttributes}>Gender </span>
                         <span>male</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Born </span>
+                    </ListGroupItem>
+                    <ListGroupItem className="d-flex justify-content-between">
+                        <span style={CharAttributes}>Born </span>
                         <span>11.03.1039</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Died </span>
+                    </ListGroupItem>
+                    <ListGroupItem className="d-flex justify-content-between">
+                        <span style={CharAttributes}>Died </span>
                         <span>13.09.1089</span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <span className="term">Culture </span>
+                    </ListGroupItem>
+                    <ListGroupItem className="d-flex justify-content-between">
+                        <span style={CharAttributes}>Culture </span>
                         <span>Anarchy</span>
-                    </li>
-                </ul>
-            </div>
+                    </ListGroupItem>
+                </ListGroup>
+            </RandomCharBlock>
         );
     }
 }
