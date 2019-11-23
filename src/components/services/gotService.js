@@ -13,26 +13,55 @@ export default class gotService {
         }
         return await res.json();
     }
-    getAllCharacters(){
-        console.log("sjsjssss")
-        return  this.getResource(`/characters?page=7&pageSize=10`);
+    async getAllCharacters(){
+        const res = await this.getResource(`/characters?page=7&pageSize=10`);
+        return  res.map(this._transformCharacter);
     }
-    getAllBooks(){
-        return  this.getResource(`/books`);
+    async getAllBooks(){
+        const res = await this.getResource(`/books`);
+        return res.map(this._transformBook);
     }
-    getAllHouses(){
-        return  this.getResource(`/houses`);
-    }
-
-    getCharacter(id){
-        return  this.getResource(`/characters/${id}`)
-    }
-    getBook(id){
-        return  this.getResource(`/books/${id}`)
-    }
-    getHouse(id){
-        return  this.getResource(`/houses/${id}`)
+    async getAllHouses(){
+        const res = await this.getResource(`/houses`);
+        return res.map(this._transformHouse);
     }
 
-    
+    async getCharacter(id){
+        const character = await this.getResource(`/characters/${id}`);
+        return this._transformCharacter(character);
+    }
+    async getBook(id){
+        const book = await this.getResource(`/books/${id}`);
+        return  this._transformBook(book);
+    }
+    async getHouse(id){
+        const house = await this.getResource(`/houses/${id}`);
+        return  this._transformHouse(house);
+    }
+
+    _transformCharacter(char) {
+        return {
+            name: char.name,
+            gender: char.gender,
+            born: char.born,
+            died: char.died,
+            culture: char.culture
+        }
+    }
+
+    _transformBook(book) {
+        return {
+            name: book.name,
+            fromReleaseDate: book.fromReleaseDate,
+            toReleaseDate:book.toReleaseDate
+        }
+    }
+
+    _transformHouse(house) {
+        return {
+            name: house.name,
+            region: house.region,
+            words: house.words    
+        }
+    }
 }
